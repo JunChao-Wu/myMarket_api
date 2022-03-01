@@ -1,43 +1,32 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 
-/* 引入各路由模块 */
-const purchase = require('./routes/purchase/purchase');
-const goods = require('./routes/goods/goods');
-const category = require('./routes/category/category');
-const warningLine = require('./routes/warningLine/waringLine');
+const Routers = require('./routes/Routers');
 
-
-const app = express()
-const port = 3000
+const app = express();
+const port = 1339;
 
 // 解决跨域
-app.use(cors())
+app.use(cors());
 
 /* 静态文件启用 */
-app.use(express.static('./public'))
+app.use(express.static('./public'));
 
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false}));
 // 处理json格式数据
 app.use(express.json())
 
-app.get('/', (req, res) => res.send('./public/index.html'))
+app.get('/', (req, res) => res.send('./public/index.html'));
 /* 处理单页面强制刷新的路由路劲问题 */
-app.get('/index/purchase', (req, res) => res.redirect('/'))
-app.get('/index/goods', (req, res) => res.redirect('/'))
-app.get('/index/category', (req, res) => res.redirect('/'))
-app.get('/index/setting', (req, res) => res.redirect('/'))
+app.get('/index/purchase', (req, res) => res.redirect('/'));
+app.get('/index/goods', (req, res) => res.redirect('/'));
+app.get('/index/category', (req, res) => res.redirect('/'));
+app.get('/index/setting', (req, res) => res.redirect('/'));
 
 
 
 
-/* 主要路由处理 */
-app.use('/purchase', purchase);
-app.use('/goods', goods)
-app.use('/category', category);
-app.use('/warningLine', warningLine);
-
-
+app.use("/service", Routers);
 
 
 
@@ -50,4 +39,4 @@ process.on('uncaughtException', function (err) {
 
 });
 
-app.listen(port, () => console.log(`Example app listening on port port!`))
+app.listen(port, () => console.log(`app listening on ${port}!`));
