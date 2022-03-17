@@ -3,12 +3,14 @@ const router = express.Router();
 
 const pool =  require('../../dao/dbUtil');
 
-const GoodsDao = require('../../dao/goodsDao')
-const PurchaseDao = require('../../dao/purchaseDao')
-const CategoryDao = require('../../dao/categoryDao')
+const GoodsDao = require('../../dao/goodsDao');
+const PurchaseDao = require('../../dao/purchaseDao');
+const CategoryDao = require('../../dao/categoryDao');
+
+import { ApiConstants } from "../RoutersConstants";
 
 // 添加goods
-router.post('/addGoods', async (req, res) => {
+router.post(ApiConstants.API.goods.addGoods, async (req, res) => {
   // 在purchase获取对应goods_name的category_id, 和所有stock之和
   // goods判断表中是否已存在一个名字的数据，有则不添加
   // goods添加goods_name, category_id, stock
@@ -51,7 +53,7 @@ router.post('/addGoods', async (req, res) => {
 
 
 // 获取goods
-router.post('/getGoods', async (req, res) => {
+router.post(ApiConstants.API.goods.getGoods, async (req, res) => {
   // {currentPage, pageSize, search}
   let getObj = req.body;
   getObj.start = (getObj.currentPage - 1) * getObj.pageSize;
@@ -87,7 +89,7 @@ router.post('/getGoods', async (req, res) => {
 
 
 // 删除goods
-router.post('/deleteGoods', async (req, res) => {
+router.post(ApiConstants.API.goods.deleteGoods, async (req, res) => {
   // 删除成功时，搜寻进货单中有goods_id的数据，置空
   let deleteObj = req.body;
 

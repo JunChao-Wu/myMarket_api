@@ -1,3 +1,6 @@
+
+import { SystemParts } from "./RoutersConstants";
+
 const { Router } = require('express');
 const router = Router();
 
@@ -9,10 +12,10 @@ const warningLine = require('./warningLine/waringLine');
 
 
 /* 主要路由处理 */
-router.use('/purchase', purchase);
-router.use('/goods', goods)
-router.use('/category', category);
-router.use('/warningLine', warningLine);
+router.use(SystemParts.purchase.url, purchase);
+router.use(SystemParts.goods.url, goods)
+router.use(SystemParts.category.url, category);
+router.use(SystemParts.warningLine.url, warningLine);
 
 
 module.exports = router;

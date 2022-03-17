@@ -4,11 +4,13 @@ const router = express.Router();
 const pool =  require('../../dao/dbUtil');
 
 
-const CategoryDao = require('..//../dao/categoryDao')
+const CategoryDao = require('..//../dao/categoryDao');
+
+import { ApiConstants } from "../RoutersConstants";
 
 
 /* 添加 分类 */
-router.post('/addCategory', async (req, res) => {
+router.post(ApiConstants.API.category.addCategory, async (req, res) => {
   let obj = req.body;
   let categoryDao = new CategoryDao(pool);
   let result =  await categoryDao.addCategory(obj.name);
@@ -20,7 +22,7 @@ router.post('/addCategory', async (req, res) => {
 })
 
 /* 删除 分类 */
-router.post('/deleteCategory', async (req, res) => {
+router.post(ApiConstants.API.category.deleteCategory, async (req, res) => {
   let obj = req.body;
   // console.log(obj)
   if(obj.id == null || obj.id == '') {
@@ -36,7 +38,7 @@ router.post('/deleteCategory', async (req, res) => {
 })
 
 /* 获取 分类 */
-router.post('/getCategory', async (req, res) => {
+router.post(ApiConstants.API.category.getCategory, async (req, res) => {
   let categoryDao = new CategoryDao(pool);
   let resultList = await categoryDao.getCategory();
   if(resultList) {

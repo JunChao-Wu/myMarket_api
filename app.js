@@ -6,6 +6,8 @@ const Routers = require('./routes/Routers');
 const app = express();
 const port = 1339;
 
+import { Root, createApiFile } from "./routes/RoutersConstants";
+
 // 解决跨域
 app.use(cors());
 
@@ -14,7 +16,10 @@ app.use(express.static('./public'));
 
 app.use(express.urlencoded({extended: false}));
 // 处理json格式数据
-app.use(express.json())
+app.use(express.json());
+
+// 生成api文件
+// app.use(createApiFile());
 
 app.get('/', (req, res) => res.send('./public/index.html'));
 /* 处理单页面强制刷新的路由路劲问题 */
@@ -25,8 +30,8 @@ app.get('/index/setting', (req, res) => res.redirect('/'));
 
 
 
-
-app.use("/service", Routers);
+// api处理
+app.use(Root.url, Routers);
 
 
 

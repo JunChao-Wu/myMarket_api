@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-
 const pool =  require('../../dao/dbUtil');
+const StockLimitDao = require('../../dao/stockLimitDao');
 
-const StockLimitDao = require('../../dao/stockLimitDao')
+import { ApiConstants } from "../RoutersConstants";
 
 /* get warningLine */
-router.post('/getWarningLine', async (req, res) => {
+router.post(ApiConstants.API.warningLine.getWarningLine, async (req, res) => {
   let result ={};
 
   let stockLimitDao = new StockLimitDao(pool);
@@ -20,7 +20,7 @@ router.post('/getWarningLine', async (req, res) => {
 })
 
 /* eidt warningLine*/
-router.post('/editWarningLine', async (req, res) => {
+router.post(ApiConstants.API.warningLine.editWarningLine, async (req, res) => {
   let limit = req.body.warningLine;
   if(limit == null || limit == '') {
     res.json({msg: 'edit failed'})
