@@ -126,8 +126,16 @@ function getValue(urlObj) {
   result = url + result;
   while (belong) {
     const _SystemPart = SystemParts[belong];
-    belong = _SystemPart && _SystemPart.belong || null;
-    url = _SystemPart && _SystemPart.url;
+    if(belong == "Root") {
+      belong = Root.belong;
+      url = Root.url;
+    }else {
+      belong = _SystemPart && _SystemPart.belong || null;
+      url = _SystemPart && _SystemPart.url || "";
+    }
     result = url + result;
   }
+  return result;
 }
+
+createApiFile()
