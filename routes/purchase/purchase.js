@@ -7,7 +7,7 @@ const CategoryDao = require('../../dao/categoryDao');
 import { ApiConstants } from "../RoutersConstants";
 
 /* 添加purchase */
-router.post(ApiConstants.API.purchase.addPurchase, async (req, res) => {
+router.post(ApiConstants.API.purchase.addPurchase.url, async (req, res) => {
 
   let purchaseObj = req.body;
   if(purchaseObj.bussiness == null || !purchaseObj.bussiness) {
@@ -41,7 +41,7 @@ router.post(ApiConstants.API.purchase.addPurchase, async (req, res) => {
 
 
 /* 获取purchase */
-router.post(ApiConstants.API.purchase.getPurchase, async (req, res) => {
+router.post(ApiConstants.API.purchase.getPurchase.url, async (req, res) => {
   let resResult = {};
   let getObj = req.body.pageObj;
   getObj.start = (getObj.currentPage - 1) * getObj.pageSize;
@@ -85,7 +85,7 @@ router.post(ApiConstants.API.purchase.getPurchase, async (req, res) => {
 
 
 /* 删除purchase */
-router.post(ApiConstants.API.purchase.deletePurchase, async (req, res) => {
+router.post(ApiConstants.API.purchase.deletePurchase.url, async (req, res) => {
   // console.log(req.body)
 
   let purchaseDao = new PurchaseDao(pool);
@@ -101,7 +101,7 @@ router.post(ApiConstants.API.purchase.deletePurchase, async (req, res) => {
 
 
 /* 修改purchase */
-router.post('/editPurchase', async (req, res) => {
+router.post(ApiConstants.API.purchase.editPurchase.url, async (req, res) => {
   let purchaseObj = req.body;
   if(!purchaseObj.bussiness || purchaseObj.bussiness == null) {
     purchaseObj.bussiness = '';
@@ -141,7 +141,7 @@ router.post('/editPurchase', async (req, res) => {
 // 特殊接口
 
 // 获取select用id和name
-router.post(ApiConstants.API.purchase.getPurchaseList, async (req, res) => {
+router.post(ApiConstants.API.purchase.getPurchaseList.url, async (req, res) => {
   let purchaseDao = new PurchaseDao(pool);
   let nameList = await purchaseDao.getPurchaseName();
   // name去重

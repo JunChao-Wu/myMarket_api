@@ -18,6 +18,8 @@ app.use(express.urlencoded({extended: false}));
 // 处理json格式数据
 app.use(express.json());
 
+app.use(createApiFile);
+
 // 生成api文件
 // app.use(createApiFile());
 

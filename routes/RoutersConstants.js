@@ -1,57 +1,67 @@
 
+const fs = require("fs");
+
 export const ApiConstants = {
   API: {
     purchase: {
       addPurchase: {
-        url: '/addPurchase',
+        url: '/add',
         belong: 'purchase',
       },
       getPurchase: {
-        url: '/getPurchase',
+        url: '/get',
         belong: 'purchase',
       },
       editPurchase: {
-        url: '/editPurchase',
+        url: '/edit',
+        belong: 'purchase',
+      },
+      deletePurchase: {
+        url: '/delete',
+        belong: 'purchase',
+      },
+      getPurchaseList: {
+        url: '/getPurchaseList',
         belong: 'purchase',
       },
     },
     goods: {
       addGoods: {
-        url: '/addGoods',
+        url: '/add',
         belong: 'goods',
       },
       getGoods: {
-        url: '/getGoods',
+        url: '/get',
         belong: 'goods',
       },
       deleteGoods: {
-        url: '/deleteGoods',
-        belong: 'goods',
-      },
-      getPurchaseNameList: {
-        url: '/getPurchaseNameList',
+        url: '/delete',
         belong: 'goods',
       },
     },
     warningLine: {
       getWarningLine: {
-        url: '/getWarningLine',
+        url: '/get',
         belong: 'warningLine',
       },
       editWarningLine: {
-        url: '/editWarningLine',
+        url: '/edit',
         belong: 'warningLine',
       },
     },
     category: {
       addCategory: {
-        url: '/addCategory',
+        url: '/add',
         belong: 'category',
       },
       getCategory: {
-        url: '/getCategory',
+        url: '/get',
         belong: 'category',
       },
+      deleteCategory: {
+        url: '/delete',
+        belong: 'category',
+      }
     },
   },
 }
@@ -83,6 +93,41 @@ export const Root = {
 };
 
 // 生成便于查看的api格式
-// export const createApiFile = function () {
-  
-// }
+const path = "./routes/apiDoc"
+export const createApiFile = function () {
+  let fileContent = "";
+  for (let key1 in ApiConstants) {
+    const api = ApiConstants[key1];
+    for (let partName in api) {
+      const SystemParts = api[partName];
+      for (let operationName in SystemParts) {
+        const lastPart = SystemParts[operationName];
+
+        const key = `ApiConstants.${key1}.${partName}.${operationName}`;
+        const value = getValue(lastPart);
+        fileContent = fileContent + `${key}: ${value}\n`;
+      }
+    }
+  }
+  try {
+    fs.writeFileSync(path, fileContent, "utf-8");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function getValue(urlObj) {
+  if (!urlObj) {
+    return "";
+  }
+  let result = "";
+  let url = urlObj && urlObj.url || "";
+  let belong = urlObj && urlObj.belong || "";
+  result = url + result;
+  while (belong) {
+    const _SystemPart = SystemParts[belong];
+    belong = _SystemPart && _SystemPart.belong || null;
+    url = _SystemPart && _SystemPart.url;
+    result = url + result;
+  }
+}
