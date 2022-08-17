@@ -24,7 +24,7 @@ app.use(createApiFile);
 // app.use(createApiFile());
 
 app.get('/', (req, res) => res.send('./public/index.html'));
-/* 处理单页面强制刷新的路由路劲问题 */
+/* 处理单页面强制刷新的路由路径问题 */
 app.get('/index/purchase', (req, res) => res.redirect('/'));
 app.get('/index/goods', (req, res) => res.redirect('/'));
 app.get('/index/category', (req, res) => res.redirect('/'));
