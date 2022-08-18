@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./node_modules/babel-cli/bin/babel-node.js app.js"
+    "start": "babel-node app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "babel-loader": "^8.2.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
     "logger": "0.0.1"
   }
 }
