@@ -222,7 +222,19 @@ function getType(data) {
     "[object Boolean]": "boolean",
   }
   let type = Object.prototype.toString.call(data);
-  return typeMap[type].toLocaleLowerCase();
+  type = typeMap[type].toLocaleLowerCase();
+  if (type == "number") {
+    // 整数
+    let intRegx = new RegExp(/^-?[1-9]\d*$/, "i");
+    // 浮点数
+    let floatRegx = new RegExp(/^-?([1-9]\d*\.\d+|0\.\d*[1-9]\d*|\d+\.\d+)$/, "i");
+    if (floatRegx.test(data)) {
+      type = "float";
+    } else if (intRegx.test(data)) {
+      type = "integer";
+    }
+  }
+  return type;
 }
 
 function deepClone(target) {

@@ -36,7 +36,7 @@ export class Crud {
       let callback = new Callback(res);
       let result = {};
       try {
-        result = await new domain(_param).excute();
+        result = await new domain(_param).execute();
         callback.successCallback(result);
       } catch (error) {
         logger.error(error);

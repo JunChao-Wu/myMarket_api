@@ -4,25 +4,23 @@ import { logger } from "../../utils/loggerUtil/logger";
 import { BaseDomain } from "../BaseDomain";
 
 import { GoodsRole } from "../../validate/goods/GoodsRole";
+import { QueryGoodsListAction } from "../../action/goods/QueryGoodsListAction";
 
 
-const methodDesc = "updateGoods";
+const methodDesc = "queryGoodsList";
 
-export class SaveGoodsDomain extends BaseDomain {
+export class QueryGoodsListDomain extends BaseDomain {
   constructor(request) {
     super(request)
     this.request = request;
   }
 
-  async excute () {
+  async execute () {
     let result = {};
     try {
-      logger.info("test");
       let res = {};
       let reqClone = this.validate();
-      console.log("🚀 ~ file: SaveGoodsDomain.js:23 ~ SaveGoodsDomain ~ excute ~ reqClone:", reqClone)
-
-
+      res = await new QueryGoodsListAction(reqClone).execute();
       result = this.makeSuccessResult(res, methodDesc);
     } catch (error) {
       result = this.makeErrorResult(error, methodDesc);
@@ -31,7 +29,7 @@ export class SaveGoodsDomain extends BaseDomain {
   }
 
   validate () {
-    let reqClone = this.validateAndFormat(GoodsRole.saveGoods, this.request);
+    let reqClone = this.validateAndFormat(GoodsRole.list, this.request);
     return reqClone;
   }
 

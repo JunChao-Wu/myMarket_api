@@ -8,6 +8,7 @@ const logger = require('morgan');
 
 const router = require('./routes/routes');
 const policies = require('./policies/impl/policies');
+import { setEnv } from "./env/env.config";
 
 // import { makeApiFile } from "./routes/routesConstant";
 
@@ -25,6 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 启动时生成url的markdown
 // makeApiFile()
+
+// 处理全局变量
+setEnv();
+
 
 // 拦截器中间件
 app.use("/", policies);
