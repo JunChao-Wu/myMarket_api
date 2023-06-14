@@ -32,7 +32,7 @@ export class Crud {
     this.router[method](route, async function(req, res, next) {
       let _param = method == "get" ? req.query : req.body;
       startTime = new Date().getTime();
-      logger.info(`${route}  ${_param}`);
+      logger.info(`${route} 入参为: ${JSON.stringify(_param)}`);
       let callback = new Callback(res);
       let result = {};
       try {

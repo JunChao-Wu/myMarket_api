@@ -15,9 +15,9 @@ export class AddGoodsAction extends ProcyAction {
     return "AddGoodsAction"
   }
 
-  handle () {
+  async handle () {
     let vo = this.request;
-    this.dao.add(vo);
+    await this.dao.add(vo);
   }
 }
 

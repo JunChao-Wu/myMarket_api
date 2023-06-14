@@ -20,7 +20,7 @@ export class AddGoodsDomain extends BaseDomain {
       logger.info("test");
       let res = {};
       let reqClone = this.validate();
-      await new AddGoodsAction(reqClone).execute();
+      res = await new AddGoodsAction(reqClone).execute();
       result = this.makeSuccessResult(res, methodDesc);
     } catch (error) {
       result = this.makeErrorResult(error, methodDesc);

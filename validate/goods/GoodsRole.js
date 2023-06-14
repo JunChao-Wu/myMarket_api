@@ -28,7 +28,7 @@ export class GoodsRole {
 class GoodsModel {
 
   static get goodsName () {
-    return new ModelMaker().string().des("商品名字").min(1).max(10).keys();
+    return new ModelMaker().string().required().des("商品名字").min(1).max(10).keys();
   }
 
   static get category_id () {

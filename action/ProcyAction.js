@@ -10,19 +10,24 @@ export class ProcyAction extends BaseAction {
   }
 
   async execute () {
+    return await this._execute();
+  }
+
+  async _execute () {
     this.startTime = new Date().getTime();
     let result = null;
     try {
-      result = await this.handle();
+      let res = await this.handle();
       this.showTimeStamp();
-
+      result = {
+        success: true,
+        data: res
+      }
     } catch (error) {
       logger.warn(error);
+      this.makeSqlErrorResult(error);
     }
-    return {
-      success: true,
-      data: result,
-    }
+    return result;
   }
 
 
@@ -31,8 +36,13 @@ export class ProcyAction extends BaseAction {
     let processTime = this.endTime - this.startTime;
     logger.info(`${this.actionName()} 用时: ${processTime}ms`);
   }
-  
 
+
+  makeSqlErrorResult (error) {
+    let errMsg = error.sqlMessage || "sql error"
+    throw new Error(errMsg);
+  }
+  
 }
 
 

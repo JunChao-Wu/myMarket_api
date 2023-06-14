@@ -4,8 +4,8 @@ const pool =  require('../utils/dbUtil/dbPool');
 
 
 const env = {
-  test: "测试全局变量",
-  pool: pool,
+  pool: pool,  // mysql连接池
+  showSql: true,  // log是否展示sql语句
 };
 
 

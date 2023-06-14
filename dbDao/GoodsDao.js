@@ -10,14 +10,14 @@ export class GoodsDao extends BaseDao {
   }
 
 
-  async list (vo) {
+  list (vo) {
     let sql = `select * from ${_table_name}`;
-    return await this.query(sql);
+    return this.query(sql, "查询商品列表");
   }
 
-  async add (vo) {
-    let sql = `insert into ${_table_name} (goods_name, category_id, stock) values ('${vo.name}', '${vo.category_id}', ${vo.stock || null})`;
-    return await this.query(sql);
+  add (vo) {
+    let sql = `insert into ${_table_name} (goods_name, category_id, stock) values ('${vo.name}', ${vo.category_id || null}, ${vo.stock || null})`;
+    return this.query(sql, "新增商品");
   }
 
 }
