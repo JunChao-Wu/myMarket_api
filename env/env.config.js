@@ -1,10 +1,8 @@
 
-
-const pool =  require('../utils/dbUtil/dbPool');
-
+const mysql =  require('../utils/dbUtil/mysql');
 
 const env = {
-  pool: pool,  // mysql连接池
+  mysql: mysql,  // mysql
   showSql: true,  // log是否展示sql语句
 };
 

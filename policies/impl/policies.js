@@ -24,7 +24,7 @@ const validateList = ["filterRequest", "test2"];
 // 过滤器生效对象, 默认全走
 const policiesMap = {
   "goods": {
-    "*": ["test2"],
+    "*": ["test2", "filterRequest"],
     "saveGoods": ["filterRequest"],
   }
 }

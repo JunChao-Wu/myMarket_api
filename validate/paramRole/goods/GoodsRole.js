@@ -1,5 +1,5 @@
 
-import { ModelMaker } from "../ModelMaker";
+import { ModelMaker } from "../../ModelMaker";
 
 
 export class GoodsRole {
@@ -7,7 +7,7 @@ export class GoodsRole {
   static get addGoods () {
     return {
       targetRole: {
-        name       : GoodsModel.goodsName,
+        goodsName  : GoodsModel.goodsName,
         category_id: GoodsModel.category_id,
         stock      : GoodsModel.stock,
       },
@@ -32,10 +32,10 @@ class GoodsModel {
   }
 
   static get category_id () {
-    return new ModelMaker().string().des("分类").keys();
+    return new ModelMaker().integer().des("分类").defaultTo(0).keys();
   }
 
   static get stock () {
-    return new ModelMaker().integer().des("库存").keys();
+    return new ModelMaker().integer().des("库存").defaultTo(0).keys();
   }
 }

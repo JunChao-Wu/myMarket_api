@@ -17,7 +17,7 @@ export class ValidateUtil {
         if (paramRole.required && originData[paramName] == null) {
           throw new createError({
             code: "xxxxx",
-            message: "是否必传",
+            message: `${paramName}必传`,
             value: originData[paramName],
             columnName: paramName,
           });

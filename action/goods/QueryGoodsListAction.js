@@ -17,7 +17,7 @@ export class QueryGoodsListAction extends ProcyAction {
 
   handle () {
     let vo = this.request;
-    return this.dao.list(vo);
+    return this.dao.queryAll(vo);
   }
 }
 

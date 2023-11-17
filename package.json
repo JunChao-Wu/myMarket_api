@@ -3,20 +3,27 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "babel-node app"
+    "start": "node_modules\\.bin\\babel-node app.js  --presets es2017,stage-3"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "log4js": "^6.9.1",
     "morgan": "~1.9.1",
-    "mysql": "^2.18.1",
-    "pug": "2.0.0-beta11"
+    "mysql2": "^3.0.0",
+    "pug": "2.0.0-beta11",
+    "sequelize": "^6.33.0"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0"
   }
 }
