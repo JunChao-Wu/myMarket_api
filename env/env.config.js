@@ -1,18 +1,8 @@
 
-const mysql =  require('../utils/dbUtil/mysql');
-
-const env = {
-  mysql: mysql,  // mysql
-  showSql: true,  // log是否展示sql语句
-};
-
+const mysql = require('../utils/dbUtil/mysql');
+const redis = require('../utils/redisUtil/Redis');
 
 export function setEnv() {
-  global.env = env;
+  global.mysql = mysql;
+  global.redis = redis;
 }
-
-
-
-
-
-

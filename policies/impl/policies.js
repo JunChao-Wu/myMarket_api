@@ -26,6 +26,7 @@ const policiesMap = {
   "goods": {
     "*": ["test2", "filterRequest"],
     "saveGoods": ["filterRequest"],
+    "getGoodsList": ["filterRequest"],
   }
 }
 

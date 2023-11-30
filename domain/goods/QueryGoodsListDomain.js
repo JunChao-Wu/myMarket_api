@@ -1,11 +1,7 @@
-
-
-import { logger } from "../../utils/loggerUtil/logger";
 import { BaseDomain } from "../BaseDomain";
 
 import { GoodsRole } from "../../validate/paramRole/goods/GoodsRole";
 import { QueryGoodsListAction } from "../../action/goods/QueryGoodsListAction";
-
 
 const methodDesc = "queryGoodsList";
 
@@ -25,6 +21,7 @@ export class QueryGoodsListDomain extends BaseDomain {
     } catch (error) {
       result = this.makeErrorResult(error, methodDesc);
     }
+    await this.unLock();
     return result;
   }
 

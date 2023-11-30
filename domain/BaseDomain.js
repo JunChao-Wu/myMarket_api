@@ -1,13 +1,15 @@
 
 import { logger } from "../utils/loggerUtil/logger";
 import { ValidateUtil } from "../utils/request/validate/ValidateUtil";
-
+import {Lock} from "../utils/lock/Lock";
 import mysql from "../utils/dbUtil/mysql";
 
 export class BaseDomain {
   constructor(request) {
-    this.request = request;
     this.t = null;
+    this.request = request;
+    this.lockList = [];
+    this.requestId = request.requestId;
   }
   
   // 创建mysql数据库事务
@@ -17,21 +19,17 @@ export class BaseDomain {
 
   async commit () {
     if (!this.t) {
-      console.log("🚀 ~ file: BaseDao.js:23 ~ BaseDao ~ rollback ~ 没有开启事务, 无效 commit");
       return;
     }
     // mysql
-    console.log("🚀 ~ file: BaseDao.js:23 ~ BaseDao ~ rollback ~ commit");
     await this.t.commit();
   }
 
   async rollback () {
     if (!this.t) {
-      console.log("🚀 ~ file: BaseDao.js:23 ~ BaseDao ~ rollback ~ 没有开启事务, 无法回滚");
       return;
     }
     // mysql
-    console.log("🚀 ~ file: BaseDao.js:23 ~ BaseDao ~ rollback ~ 回滚");
     await this.t.rollback();
   }
 
@@ -61,7 +59,6 @@ export class BaseDomain {
   }
 
   makeErrorResult (e, methodDesc) {
-    console.log("🚀 ~ file: BaseDomain.js:36 ~ BaseDomain ~ makeErrorResult ~ e:", e)
     logger.error(e);
     let errMessage = e.message || `${methodDesc}失败!`;
     let errCode = e.errCode || e.code;
@@ -70,6 +67,25 @@ export class BaseDomain {
       code: 200,
       errCode,
       message: errMessage,
+    }
+  }
+
+  async lock(key, seconds) {
+    if (!key) {
+      return;
+    }
+    let lockObj = new Lock(key, this.requestId);
+    await lockObj.writeLock(seconds);
+    this.lockList.push(lockObj);
+  }
+
+  async unLock () {
+    if (this.lockList.length <= 0) {
+      return;
+    }
+    for (let i = this.lockList.length - 1; i >= 0; --i) {
+      const lockObj = this.lockList[i];
+      await lockObj.unLock();
     }
   }
 
