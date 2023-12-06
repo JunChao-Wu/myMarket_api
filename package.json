@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node_modules\\.bin\\babel-node app.js  --presets es2017,stage-3"
+    "start": "node_modules\\.bin\\babel-node app.js  --presets es2017,stage-3",
+    "ts": "node_modules\\.bin\\tsc",
+    "eslint": "node_modules\\.bin\\eslint api/**"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -23,9 +25,16 @@
     "pug": "2.0.0-beta11",
     "redis": "^4.6.11",
     "sequelize": "^6.33.0",
+    "tsrpc": "^3.4.12",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "eslint": "^8.55.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "typescript": "^5.3.2"
   }
 }

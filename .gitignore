@@ -129,5 +129,5 @@ web_api\.iml
 .vscode
 
 logs
-.md
+*.md
 doc

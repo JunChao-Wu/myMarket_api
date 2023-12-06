@@ -6,9 +6,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const router = require('./routes/routes');
-const policies = require('./policies/impl/policies');
-import { setEnv } from "./env/env.config";
+const router = require('./api/routes/routes');
+const policies = require('./api/policies/impl/policies');
+import { setEnv } from "./api/env/env.config";
 
 // import { makeApiFile } from "./routes/routesConstant";
 
